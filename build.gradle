@@ -1,9 +1,9 @@
 plugins {
-    id 'org.springframework.boot' version '2.3.0.RELEASE'
-    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'org.springframework.boot' version '2.2.4.RELEASE'
     id 'java'
-    id 'war'
 }
+
+apply plugin: 'io.spring.dependency-management'
 
 group = 'com.sample'
 version = '0.0.1-SNAPSHOT'
@@ -20,23 +20,22 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-cache'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-web-services'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'org.springframework.retry:spring-retry'
+    implementation('org.apache.tomcat.embed:tomcat-embed-jasper')
     compileOnly 'org.projectlombok:lombok'
-    compile group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.2.0'
-    compile group: 'org.hibernate', name: 'hibernate-gradle-plugin', version: '5.4.14.Final'
-    compile group: 'org.springdoc', name:'springdoc-openapi-ui', version:'1.2.32'
+    runtimeOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'com.h2database:h2'
     runtimeOnly 'mysql:mysql-connector-java'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
-    testImplementation('org.springframework.boot:spring-boot-starter-test') {
-        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-    }
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'io.projectreactor:reactor-test'
-}
-
-test {
-    useJUnitPlatform()
 }
